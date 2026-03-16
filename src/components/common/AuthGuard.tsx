@@ -26,7 +26,7 @@ const AuthGuard: React.FC<AuthGuardProps> = ({
 
   // If user is authenticated but trying to access login, redirect to tabs
   if (!requireAuth && isAuthenticated) {
-    return <Redirect href={AUTH_ROUTES.TABS.DASHBOARD} />;
+    return <Redirect href={AUTH_ROUTES.TABS.HOME} />;
   }
 
   return <>{children}</>;

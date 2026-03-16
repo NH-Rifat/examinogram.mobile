@@ -17,7 +17,7 @@ import { NavigationWrapper } from "@/components/common/NavigationWrapper";
 import { ThemeProvider } from "@/theme";
 
 export const unstable_settings = {
-  anchor: "(public)",
+  anchor: "index",
 };
 
 export default function RootLayout() {

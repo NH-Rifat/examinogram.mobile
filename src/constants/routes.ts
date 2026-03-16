@@ -1,9 +1,3 @@
-/**
- * Application route constants
- * Centralized location for all route paths used in the app
- * Organized by authentication requirement
- */
-
 // Unauthenticated routes (public access)
 export const UNAUTH_ROUTES = {
   INDEX: "/",
@@ -17,7 +11,10 @@ export const UNAUTH_ROUTES = {
 export const AUTH_ROUTES = {
   // Tab routes
   TABS: {
-    DASHBOARD: "/dashboard",
+    HOME: "/home",
+    RESULT: "/result",
+    MYRESOURCE: "/my-resource",
+    LIBRARY: "/library",
   },
 } as const;
 

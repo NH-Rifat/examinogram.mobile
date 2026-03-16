@@ -11,11 +11,6 @@ export const API_ENDPOINTS = {
     SIGN_UP: "/api/sign-up",
     CHANGE_PASSWORD: "/api/users/{id}/password",
     RESET_PASSWORD: "/api/users/{id}/password/reset",
-    MFA_MOBILE_VERIFICATION:
-      "/api/users/login-id/{loginId}/mfa/code/mobile-verification",
-    MFA_EMAIL_VERIFICATION:
-      "/api/users/login-id/{loginId}/mfa/code/email-verification",
-    MFA_SECURITY_VERIFICATION: "/api/users/mfa/code/security-verification",
   },
 
   // Orderbook Directory
@@ -28,36 +23,6 @@ export const API_ENDPOINTS = {
     GROUPS: (params: ApiFilterType) =>
       createApiUrl(
         `/api/orderbook-directories/${params?.stockExchange}/groups`,
-        params,
-      ),
-    MARKET_TYPES: (params: ApiFilterType) =>
-      createApiUrl(
-        `/api/orderbook-directories/${params?.stockExchange}/market-types`,
-        params,
-      ),
-    INSTRUMENTS: (params: ApiFilterType) =>
-      createApiUrl(
-        `/api/orderbook-directories/${params?.stockExchange}/instruments`,
-        params,
-      ),
-    SECTORS: (params: ApiFilterType) =>
-      createApiUrl(
-        `/api/orderbook-directories/${params?.stockExchange}/sectors`,
-        params,
-      ),
-    CATEGORIES: (params: ApiFilterType) =>
-      createApiUrl(
-        `/api/orderbook-directories/${params?.stockExchange}/categories`,
-        params,
-      ),
-    TRADING_CODES: (params: ApiFilterType) =>
-      createApiUrl(
-        `/api/orderbook-directories/${params?.stockExchange}/trading-codes`,
-        params,
-      ),
-    STOCK_INFO: (params: ApiFilterType) =>
-      createApiUrl(
-        `/api/orderbook-directories/${params?.stockExchange}/orderbook-info`,
         params,
       ),
   },

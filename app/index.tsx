@@ -29,8 +29,8 @@ const Index = () => {
 
   return (
     <NavigationWrapper>
-      {isAuthenticated ? (
-        <Redirect href={AUTH_ROUTES.TABS.DASHBOARD} />
+      {!isAuthenticated ? (
+        <Redirect href={AUTH_ROUTES.TABS.HOME} />
       ) : (
         <Redirect href={UNAUTH_ROUTES.LOGIN} />
       )}

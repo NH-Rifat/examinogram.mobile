@@ -1,11 +1,8 @@
 import { AuthGuard } from "@/components/common/AuthGuard";
 import { NavigationWrapper } from "@/components/common/NavigationWrapper";
-import LoginScreen from "@/src/screens/Login/components";
+import LoginScreen from "@/src/screens/Login";
 import React from "react";
 
-/**
- * Login page route
- */
 const LoginPage = () => (
   <AuthGuard requireAuth={false}>
     <NavigationWrapper>

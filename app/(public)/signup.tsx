@@ -1,11 +1,14 @@
+import { AuthGuard } from "@/components/common/AuthGuard";
+import { NavigationWrapper } from "@/components/common/NavigationWrapper";
+import LoginScreen from "@/src/screens/Login";
 import React from "react";
-import { View } from "react-native";
 
-import { useTheme } from "@/theme";
+const LoginPage = () => (
+  <AuthGuard requireAuth={false}>
+    <NavigationWrapper>
+      <LoginScreen />
+    </NavigationWrapper>
+  </AuthGuard>
+);
 
-const SignUpPage = () => {
-  const { currentTheme } = useTheme();
-  return <View style={{ flex: 1, backgroundColor: currentTheme.background }} />;
-};
-
-export default SignUpPage;
+export default LoginPage;

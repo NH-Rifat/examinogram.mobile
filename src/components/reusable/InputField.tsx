@@ -1,5 +1,4 @@
 import { Ionicons } from "@expo/vector-icons";
-import lodash from "lodash";
 import React, { useState } from "react";
 import { Controller, useFormContext } from "react-hook-form";
 import {
@@ -36,17 +35,9 @@ export const InputField: React.FC<InputProps> = ({
   ...rest
 }) => {
   const { currentTheme } = useTheme();
-  const {
-    control,
-    formState: { errors },
-  } = useFormContext();
+  const { control } = useFormContext();
 
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
-
-  // Get nested error message using lodash
-  const errorMessage = lodash.get(errors, `${name}.message`) as
-    | string
-    | undefined;
 
   const styles = StyleSheet.create({
     container: {
@@ -64,11 +55,12 @@ export const InputField: React.FC<InputProps> = ({
       backgroundColor: currentTheme.inputBackground,
       borderRadius: 12,
       borderWidth: 1,
-      borderColor: errorMessage
-        ? currentTheme.errorBorder
-        : currentTheme.border,
+      borderColor: currentTheme.border,
       paddingHorizontal: 16,
       minHeight: multiline ? 100 : 56,
+    },
+    inputContainerError: {
+      borderColor: currentTheme.errorBorder,
     },
     inputContainerDisabled: {
       backgroundColor: currentTheme.surfaceRaised,
@@ -101,55 +93,61 @@ export const InputField: React.FC<InputProps> = ({
       <Controller
         control={control}
         name={name}
-        render={({ field: { onChange, onBlur, value } }) => (
-          <View
-            style={[
-              styles.inputContainer,
-              disabled && styles.inputContainerDisabled,
-            ]}
-          >
-            {icon && (
-              <Ionicons
-                name={icon}
-                size={20}
-                color={currentTheme.textSecondary}
-                style={styles.icon}
-              />
-            )}
-
-            <TextInput
-              style={styles.input}
-              placeholder={placeholder}
-              placeholderTextColor={currentTheme.placeholder}
-              value={value}
-              onChangeText={onChange}
-              onBlur={onBlur}
-              editable={!disabled}
-              secureTextEntry={isPassword && !isPasswordVisible}
-              multiline={multiline}
-              numberOfLines={numberOfLines}
-              textAlignVertical={multiline ? "top" : "center"}
-              {...rest}
-            />
-
-            {isPassword && (
-              <TouchableOpacity
-                onPress={() => setIsPasswordVisible(!isPasswordVisible)}
-                style={styles.eyeIcon}
-                hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
-              >
+        render={({
+          field: { onChange, onBlur, value },
+          fieldState: { error },
+        }) => (
+          <>
+            <View
+              style={[
+                styles.inputContainer,
+                error && styles.inputContainerError,
+                disabled && styles.inputContainerDisabled,
+              ]}
+            >
+              {icon && (
                 <Ionicons
-                  name={isPasswordVisible ? "eye-off-outline" : "eye-outline"}
+                  name={icon}
                   size={20}
                   color={currentTheme.textSecondary}
+                  style={styles.icon}
                 />
-              </TouchableOpacity>
-            )}
-          </View>
+              )}
+
+              <TextInput
+                style={styles.input}
+                placeholder={placeholder}
+                placeholderTextColor={currentTheme.placeholder}
+                value={value}
+                onChangeText={onChange}
+                onBlur={onBlur}
+                editable={!disabled}
+                secureTextEntry={isPassword && !isPasswordVisible}
+                multiline={multiline}
+                numberOfLines={numberOfLines}
+                textAlignVertical={multiline ? "top" : "center"}
+                {...rest}
+              />
+
+              {isPassword && (
+                <TouchableOpacity
+                  onPress={() => setIsPasswordVisible(!isPasswordVisible)}
+                  style={styles.eyeIcon}
+                  hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
+                >
+                  <Ionicons
+                    name={isPasswordVisible ? "eye-off-outline" : "eye-outline"}
+                    size={20}
+                    color={currentTheme.textSecondary}
+                  />
+                </TouchableOpacity>
+              )}
+            </View>
+
+            {error && <Text style={styles.errorText}>{error.message}</Text>}
+          </>
         )}
       />
-
-      {errorMessage && <Text style={styles.errorText}>{errorMessage}</Text>}
     </View>
   );
 };
